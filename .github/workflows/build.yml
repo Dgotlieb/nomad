@@ -105,7 +105,9 @@ jobs:
           npm install -g yarn
 
       - name: Build prerelease
-        run: make prerelease
+        run: |
+          apt install protobuf-compiler
+          make prerelease
       
       - name: Build
         env:
