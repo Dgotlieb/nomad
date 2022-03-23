@@ -157,11 +157,12 @@ jobs:
         run: |
           npm install -g yarn
 
+      - name: Testing
+        run: sudo apt-get install -y gcc-5-arm-linux-gnueabihf gcc-5-multilib-arm-linux-gnueabihf
+
       - name: Install dependencies
-        run: |
-          sudo ./scripts/vagrant-linux-priv-buf.sh
-          apt-get install -y gcc-5-arm-linux-gnueabihf gcc-5-multilib-arm-linux-gnueabihf
-      
+        run: sudo ./scripts/vagrant-linux-priv-buf.sh
+        
       - name: Build prerelease
         run: make prerelease
       
