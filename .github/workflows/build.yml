@@ -106,7 +106,7 @@ jobs:
           npm install -g yarn
 
       - name: Install buf
-        run: scoop install buf
+        run: sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -163,7 +163,7 @@ jobs:
 
       # Install latest version of buf
       - name: Install buf
-        run: brew install bufbuild/buf/buf
+        run: sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -257,7 +257,7 @@ jobs:
           npm install -g yarn
 
       - name: Install buf
-        run: brew install bufbuild/buf/buf
+        run: sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
