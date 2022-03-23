@@ -158,7 +158,7 @@ jobs:
           npm install -g yarn
 
       - name: Install dependencies
-        run: sudo ./scripts/ci-install-deps.sh ${{ matrix.goos }} ${{ matrix.goarch }}
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
         
       - name: Build prerelease
         run: make prerelease
