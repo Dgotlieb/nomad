@@ -164,8 +164,8 @@ jobs:
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
         
-      # - name: Build prerelease
-      #   run: make prerelease
+      - name: Build prerelease
+        run: make prerelease
       
       - name: Build
         env:

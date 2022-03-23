@@ -31,21 +31,24 @@ apt-get install -y \
 
 # Install 32 bit headers and libraries for linux/386 builds
 if [[ $1 == "linux" && $2 == "386" ]]; then
+    cho "Installing linux/386 dependencies"
     apt-get install gcc-multilib 
 fi
 
 # Install ARM build utilities for arm builds
 if [[ $2 == "arm" || $2 == "arm64" ]]; then
+    echo "Installing arm/arm64 dependencies"
     apt-get install -y \
         binutils-aarch64-linux-gnu \
         binutils-arm-linux-gnueabihf \
         gcc-5-aarch64-linux-gnu \
-        gcc-5-arm-linux-gnueabihf \
-        gcc-5-multilib-arm-linux-gnueabihf
+        gcc-arm-linux-gnueabi \
+        gcc-arm-linux-gnueabihf
 fi
 
 # Install Windows build utilities for windows builds
 if [[ $1 == "windows" ]]; then
+    echo "Installing windows dependencies"
     apt-get install -y \
         binutils-mingw-w64 \
         gcc-mingw-w64
