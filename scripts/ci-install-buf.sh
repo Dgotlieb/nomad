@@ -19,4 +19,4 @@ else
 fi
 
 # Simple smoke test to ensure buf is installed
-buf --version
+# buf --version

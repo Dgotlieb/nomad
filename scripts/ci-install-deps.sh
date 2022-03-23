@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 echo "Installing dependencies for goos:$1 goarch:$2"
 
