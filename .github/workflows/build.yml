@@ -107,7 +107,7 @@ jobs:
 
       - name: Build prerelease
         run: |
-          apt install protobuf-compiler
+          apt-get install protobuf-compiler
           make prerelease
       
       - name: Build
