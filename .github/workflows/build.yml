@@ -107,9 +107,7 @@ jobs:
 
       - name: Install the buf CLI 
         uses: bufbuild/buf-setup-action@v1.1.1
-
-      - name: Smoke test to ensure buf is installed
-        run: buf --version
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build prerelease
         run:  make prerelease
@@ -159,6 +157,10 @@ jobs:
       - name: Install Yarn
         run: |
           npm install -g yarn
+
+      - name: Install the buf CLI 
+        uses: bufbuild/buf-setup-action@v1.1.1
+        github_token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Build prerelease
         run: make prerelease
@@ -271,6 +273,10 @@ jobs:
       - name: Install Yarn
         run: |
           npm install -g yarn
+
+      - name: Install the buf CLI 
+        uses: bufbuild/buf-setup-action@v1.1.1
+        github_token: ${{ secrets.GITHUB_TOKEN }}
            
       - name: Build prerelease
         run: make prerelease
