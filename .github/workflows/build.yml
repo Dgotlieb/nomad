@@ -107,7 +107,8 @@ jobs:
 
       - name: Install the buf CLI 
         uses: bufbuild/buf-setup-action@v1.1.1
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github_token: ${{ github.token }}
 
       - name: Build prerelease
         run:  make prerelease
@@ -160,7 +161,8 @@ jobs:
 
       - name: Install the buf CLI 
         uses: bufbuild/buf-setup-action@v1.1.1
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github_token: ${{ github.token }}
       
       - name: Build prerelease
         run: make prerelease
@@ -276,7 +278,8 @@ jobs:
 
       - name: Install the buf CLI 
         uses: bufbuild/buf-setup-action@v1.1.1
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github_token: ${{ github.token }}
            
       - name: Build prerelease
         run: make prerelease
