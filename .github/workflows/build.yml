@@ -9,6 +9,7 @@ on:
       # Push events to branches matching refs/heads/release/**
       # - 'release/**'
       - 'crt/1.0.x'
+      - 'protobuf-patch'
 
 env:
   PKG_NAME: "nomad"
