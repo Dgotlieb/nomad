@@ -105,11 +105,14 @@ jobs:
         run: |
           npm install -g yarn
 
+      - name: Install the buf CLI 
+        uses: bufbuild/buf-setup-action@v1.1.1
+
+      - name: Smoke test to ensure buf is installed
+        run: buf --version
+
       - name: Build prerelease
-        run: |
-          sudo apt install protobuf-compiler
-          protoc --version
-          make prerelease
+        run:  make prerelease
       
       - name: Build
         env:
