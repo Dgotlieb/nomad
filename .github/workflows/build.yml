@@ -134,8 +134,6 @@ jobs:
         goos: [ linux ]
         goarch: [ "arm", "arm64", "386", "amd64" ]
       fail-fast: true
-    env: 
-      CGO_ENABLED: 1
     
     name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
@@ -179,15 +177,15 @@ jobs:
             binutils-aarch64-linux-gnu \
             binutils-arm-linux-gnueabihf \
             gcc-aarch64-linux-gnu \
-            gcc-arm-linux-gnueabihf \
+            gcc-5-arm-linux-gnueabihf \
             gcc-multilib-arm-linux-gnueabihf
 
       - name: Set gcc
         run: |
           if [ "${{ matrix.goarch }}" == "arm" ]; then
-            echo "CC=arm-linux-gnueabihf-gcc" >> $GITHUB_ENV
+            echo "CC=arm-linux-gnueabihf-gcc-5" >> $GITHUB_ENV
           elif [ "${{ matrix.goarch }}" == "arm64" ]; then
-            echo "CC=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
+            echo "CC=aarch64-linux-gnu-gcc-5" >> $GITHUB_ENV
           fi
 
       - name: Build
@@ -275,7 +273,7 @@ jobs:
           npm install -g yarn
 
       - name: Install buf 
-        run: brew install protobuf bufbuild/buf/buf
+        run: brew install protobuf@3.6 bufbuild/buf/buf
            
       - name: Build prerelease
         run: make prerelease
