@@ -134,6 +134,8 @@ jobs:
         goos: [ linux ]
         goarch: [ "arm", "arm64", "386", "amd64" ]
       fail-fast: true
+    env: 
+      CGO_ENABLED: 1
     
     name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
@@ -273,7 +275,7 @@ jobs:
           npm install -g yarn
 
       - name: Install buf 
-        run: brew install protobuf
+        run: brew install protobuf bufbuild/buf/buf
            
       - name: Build prerelease
         run: make prerelease
