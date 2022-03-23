@@ -158,7 +158,7 @@ jobs:
           npm install -g yarn
       
       - name: Install buf
-        run: sudo sh scripts/vagrant-linux-priv-buf.sh "GHA_RUNNERS"
+        run: brew install bufbuild/buf/buf
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
