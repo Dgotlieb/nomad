@@ -95,14 +95,14 @@ bootstrap: deps lint-deps git-hooks # Install all dependencies
 deps:  ## Install build and development dependencies
 ## Keep versions in sync with tools/go.mod for now (see https://github.com/golang/go/issues/30515)
 	@echo "==> Updating build dependencies..."
-	GO111MODULE=on cd tools && go get github.com/hashicorp/go-bindata/go-bindata@bf7910af899725e4938903fb32048c7c0b15f12e
-	GO111MODULE=on cd tools && go get github.com/elazarl/go-bindata-assetfs/go-bindata-assetfs@234c15e7648ff35458026de92b34c637bae5e6f7
-	GO111MODULE=on cd tools && go get github.com/a8m/tree/cmd/tree@fce18e2a750ea4e7f53ee706b1c3d9cbb22de79c
-	GO111MODULE=on cd tools && go get gotest.tools/gotestsum@v0.4.2
-	GO111MODULE=on cd tools && go get github.com/hashicorp/hcl/v2/cmd/hclfmt@v2.5.1
+	GO111MODULE=on cd tools && go get -u github.com/hashicorp/go-bindata/go-bindata@bf7910af899725e4938903fb32048c7c0b15f12e
+	GO111MODULE=on cd tools && go get -u github.com/elazarl/go-bindata-assetfs/go-bindata-assetfs@234c15e7648ff35458026de92b34c637bae5e6f7
+	GO111MODULE=on cd tools && go get -u github.com/a8m/tree/cmd/tree@fce18e2a750ea4e7f53ee706b1c3d9cbb22de79c
+	GO111MODULE=on cd tools && go get -u gotest.tools/gotestsum@v0.4.2
+	GO111MODULE=on cd tools && go get -u github.com/hashicorp/hcl/v2/cmd/hclfmt@v2.5.1
 	GO111MODULE=on cd tools && go install github.com/golang/protobuf/protoc-gen-go@v1.3.4
-	GO111MODULE=on cd tools && go get github.com/hashicorp/go-msgpack/codec/codecgen@v1.1.5
-	GO111MODULE=on cd tools && go get github.com/hashicorp/go-changelog/cmd/changelog-build@latest
+	GO111MODULE=on cd tools && go get -u github.com/hashicorp/go-msgpack/codec/codecgen@v1.1.5
+	GO111MODULE=on cd tools && go get -u github.com/hashicorp/go-changelog/cmd/changelog-build@latest
 
 .PHONY: lint-deps
 lint-deps: ## Install linter dependencies

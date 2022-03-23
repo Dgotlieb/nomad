@@ -156,15 +156,16 @@ jobs:
       - name: Install Yarn
         run: |
           npm install -g yarn
-      
+
+      # Install latest version of buf
       - name: Install buf
         run: brew install bufbuild/buf/buf
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
         
-      - name: Build prerelease
-        run: make prerelease
+      # - name: Build prerelease
+      #   run: make prerelease
       
       - name: Build
         env:
