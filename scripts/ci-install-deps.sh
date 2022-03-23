@@ -29,7 +29,7 @@ apt-get install -y \
 	unzip \
 	wget
 
-if [[ $2 == "386" ]]; then
+if [[ $1 == "linux" && $2 == "386" ]]; then
     apt-get install gcc-multilib 
 
 # Install ARM build utilities
