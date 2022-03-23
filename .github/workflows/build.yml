@@ -158,12 +158,13 @@ jobs:
           npm install -g yarn
 
       - name: Install dependencies
-        run: sudo ./scripts/vagrant-linux-priv-buf.sh
+        run: |
+          sudo ./scripts/vagrant-linux-priv-buf.sh
+          apt-get install -y gcc-5-arm-linux-gnueabihf gcc-5-multilib-arm-linux-gnueabihf
       
       - name: Build prerelease
         run: make prerelease
       
-
       - name: Build
         env:
           GOOS: ${{ matrix.goos }}
