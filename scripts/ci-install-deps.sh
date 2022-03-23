@@ -30,13 +30,13 @@ apt-get install -y \
 	wget
 
 # Install 32 bit headers and libraries for linux/386 builds
-if [[ $1 == "linux" && $2 == "386" ]]; then
+if [ $1 == "linux" && $2 == "386" ]; then
     cho "Installing linux/386 dependencies"
     apt-get install gcc-multilib 
 fi
 
 # Install ARM build utilities for arm builds
-if [[ $2 == "arm" || $2 == "arm64" ]]; then
+if [ $2 == "arm" || $2 == "arm64" ]; then
     echo "Installing arm/arm64 dependencies"
     apt-get install -y \
         binutils-aarch64-linux-gnu \
@@ -47,7 +47,7 @@ if [[ $2 == "arm" || $2 == "arm64" ]]; then
 fi
 
 # Install Windows build utilities for windows builds
-if [[ $1 == "windows" ]]; then
+if [ $1 == "windows" ]; then
     echo "Installing windows dependencies"
     apt-get install -y \
         binutils-mingw-w64 \
