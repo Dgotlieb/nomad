@@ -105,10 +105,8 @@ jobs:
         run: |
           npm install -g yarn
 
-      - name: Install the buf CLI 
-        uses: bufbuild/buf-setup-action@v1.1.1
-        with:
-          github_token: ${{ github.token }}
+      - name: Install buf
+        run: sudo ./scripts/vagrant-linux-priv-buf.sh
 
       - name: Build prerelease
         run:  make prerelease
@@ -160,9 +158,7 @@ jobs:
           npm install -g yarn
 
       - name: Install the buf CLI 
-        uses: bufbuild/buf-setup-action@v1.1.1
-        with:
-          github_token: ${{ github.token }}
+        run: sudo ./scripts/vagrant-linux-priv-buf.sh
       
       - name: Build prerelease
         run: make prerelease
@@ -276,10 +272,8 @@ jobs:
         run: |
           npm install -g yarn
 
-      - name: Install the buf CLI 
-        uses: bufbuild/buf-setup-action@v1.1.1
-        with:
-          github_token: ${{ github.token }}
+      - name: Install buf 
+        run: brew install protobuf
            
       - name: Build prerelease
         run: make prerelease
