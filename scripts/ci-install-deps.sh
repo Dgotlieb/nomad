@@ -29,21 +29,27 @@ apt-get install -y \
 	unzip \
 	wget
 
+# Install 32 bit headers and libraries for linux/386 builds
 if [[ $1 == "linux" && $2 == "386" ]]; then
     apt-get install gcc-multilib 
+fi
 
-# Install ARM build utilities
-apt-get install -y \
-	binutils-aarch64-linux-gnu \
-	binutils-arm-linux-gnueabihf \
-	gcc-5-aarch64-linux-gnu \
-	gcc-5-arm-linux-gnueabihf \
-	gcc-5-multilib-arm-linux-gnueabihf
+# Install ARM build utilities for arm builds
+if [[ $2 == "arm" || $2 == "arm64" ]]; then
+    apt-get install -y \
+        binutils-aarch64-linux-gnu \
+        binutils-arm-linux-gnueabihf \
+        gcc-5-aarch64-linux-gnu \
+        gcc-5-arm-linux-gnueabihf \
+        gcc-5-multilib-arm-linux-gnueabihf
+fi
 
-# Install Windows build utilities
-apt-get install -y \
-	binutils-mingw-w64 \
-	gcc-mingw-w64
+# Install Windows build utilities for windows builds
+if [[ $1 == "windows" ]]; then
+    apt-get install -y \
+        binutils-mingw-w64 \
+        gcc-mingw-w64
+fi
 
 # Ensure everything is up to date
 apt-get upgrade -y
