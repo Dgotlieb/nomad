@@ -105,13 +105,11 @@ jobs:
         run: |
           npm install -g yarn
 
-      - name: Install protoc
-        uses: arduino/setup-protoc@v1
-        with:
-          version: '3.x'
-
       - name: Build prerelease
-        run: make prerelease
+        run: |
+          sudo apt install protobuf-compiler
+          protoc --version
+          make prerelease
       
       - name: Build
         env:
