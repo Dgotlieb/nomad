@@ -74,57 +74,61 @@ jobs:
           echo "::set-output name=ldflags::"-s -w -X \'$project/version.Name=${{ env.PKG_NAME }}\' \
           -X \'$project/version.GitDescribe=v$(make version base=1)\'""
   
-  # build-other:
-  #   needs: [ get-go-version, get-product-version, generate-ld-flags ]
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       goos: [ windows ]
-  #       goarch: [ "386", "amd64" ]
-  #     fail-fast: true
+  build-other:
+    needs: [ get-go-version, get-product-version, generate-ld-flags ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [ windows ]
+        goarch: [ "386", "amd64" ]
+      fail-fast: false
 
-  #   name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+    name: Go ${{ needs.get-go-version.outputs.go-version }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Setup go
-  #       uses: actions/setup-go@v2
-  #       with:
-  #         go-version: ${{ needs.get-go-version.outputs.go-version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ needs.get-go-version.outputs.go-version }}
  
-  #     - name: Build dependencies
-  #       run: make deps
+      - name: Build dependencies
+        run: make deps
       
-  #     - name: Setup node and yarn
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
-  #         cache-dependency-path: 'ui/yarn.lock'
+      - name: Setup node and yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache-dependency-path: 'ui/yarn.lock'
       
-  #     - name: Install Yarn
-  #       run: |
-  #         npm install -g yarn
+      - name: Install Yarn
+        run: |
+          npm install -g yarn
 
-  #     - name: Install buf
-  #       run: sudo ./scripts/vagrant-linux-priv-buf.sh
+      - name: Install buf
+        run: scoop install buf
 
-  #     - name: Build prerelease
-  #       run:  make prerelease
+      - name: Install dependencies
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
+
+      - name: Build prerelease
+        run:  make prerelease
       
-  #     - name: Build
-  #       env:
-  #         GOOS: ${{ matrix.goos }}
-  #         GOARCH: ${{ matrix.goarch }}
-  #         GO_TAGS: ${{ env.GO_TAGS }}
-  #         GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
-  #         CGO_ENABLED: 1
-  #       run: |
-  #         make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #         mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #         path: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          GO_TAGS: ${{ env.GO_TAGS }}
+          GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
+          CGO_ENABLED: 1
+          GO111MODULE: on
+        run: |
+          make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          path: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
         
   build-linux:
     needs: [ get-go-version, get-product-version, generate-ld-flags ]
@@ -174,6 +178,7 @@ jobs:
           GO_TAGS: ${{ env.GO_TAGS }}
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
+          GO111MODULE: on
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
           mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
@@ -218,59 +223,63 @@ jobs:
           name: ${{ env.DEB_PACKAGE }}
           path: out/${{ env.DEB_PACKAGE }}
 
-  # build-darwin:
-  #   needs: [ get-go-version, get-product-version, generate-ld-flags ]
-  #   runs-on: macos-10.15
-  #   strategy:
-  #     matrix:
-  #       goos: [ darwin ]
-  #       goarch: [ "arm64", "amd64" ]
-  #       go: [ "1.16.12" ]
-  #     fail-fast: true
+  build-darwin:
+    needs: [ get-go-version, get-product-version, generate-ld-flags ]
+    runs-on: macos-10.15
+    strategy:
+      matrix:
+        goos: [ darwin ]
+        goarch: [ "arm64", "amd64" ]
+        go: [ "1.16.12" ]
+      fail-fast: true
 
-  #   name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
+    name: Go ${{ matrix.go }} ${{ matrix.goos }} ${{ matrix.goarch }} build
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Setup go
-  #       uses: actions/setup-go@v2
-  #       with:
-  #         go-version: ${{ matrix.go }}
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
 
-  #     - name: Build dependencies
-  #       run: make deps
+      - name: Build dependencies
+        run: make deps
       
-  #     - name: Setup node and yarn
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '14'
-  #         cache-dependency-path: 'ui/yarn.lock'
+      - name: Setup node and yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache-dependency-path: 'ui/yarn.lock'
       
-  #     - name: Install Yarn
-  #       run: |
-  #         npm install -g yarn
+      - name: Install Yarn
+        run: |
+          npm install -g yarn
 
-  #     - name: Install buf 
-  #       run: brew install protobuf@3.6 bufbuild/buf/buf
+      - name: Install buf
+        run: brew install bufbuild/buf/buf
+
+      - name: Install dependencies
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
            
-  #     - name: Build prerelease
-  #       run: make prerelease
+      - name: Build prerelease
+        run: make prerelease
       
-  #     - name: Build
-  #       env:
-  #         GOOS: ${{ matrix.goos }}
-  #         GOARCH: ${{ matrix.goarch }}
-  #         GO_TAGS: "${{ env.GO_TAGS }} netcgo"
-  #         GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
-  #         CGO_ENABLED: 1
-  #       run: |
-  #         make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #         mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
-  #         path: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          GO_TAGS: "${{ env.GO_TAGS }} netcgo"
+          GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
+          CGO_ENABLED: 1
+          GO111MODULE: on
+        run: |
+          make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
+          path: ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
 
   # This placed here for when the Nomad team is ready to build docker images. 
   # Please reach out the RDX team for assistance or refer to the CRT Self-Serve Onboarding doc. 
