@@ -108,7 +108,7 @@ jobs:
       - name: Install buf
         shell: bash
         run: |
-          echo "/tmp/buf" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/bin"" >> $GITHUB_PATH
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
@@ -167,7 +167,7 @@ jobs:
       # Install latest version of buf
       - name: Install buf
         run: |
-          echo "/tmp/buf" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/bin"" >> $GITHUB_PATH
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
@@ -263,11 +263,8 @@ jobs:
 
       - name: Install buf
         run: |
-          echo "/tmp/buf" >> $GITHUB_PATH
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-
-      - name: Install dependencies
-        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
            
       - name: Build prerelease
         run: make prerelease
