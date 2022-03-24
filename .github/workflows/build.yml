@@ -172,8 +172,6 @@ jobs:
       - run: ls -la
 
       - name: Build prerelease
-        env: 
-          GOPATH: $HOME/go
         run: make prerelease
       
       - name: Build
@@ -184,7 +182,6 @@ jobs:
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
           GO111MODULE: on
-          GOPATH: ${{ github.workspace }}
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
           mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
