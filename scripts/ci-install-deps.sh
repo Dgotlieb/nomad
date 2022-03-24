@@ -2,7 +2,8 @@
 
 set -e
 
-echo "Installing dependencies for goos:$1 goarch:$2"
+# $1 == goos, $2 == goarch, $3 == $HOME path, which differs between OS'
+echo "Installing dependencies for goos:$1 goarch:$2 in dir:$3"
 
 #### Install buf CLI ####
 
@@ -10,7 +11,7 @@ VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
 # $HOME evaluates to /home/runner in GHA
-DIR="/home/runner"
+DIR="$3"
 mkdir -p  "$DIR/.local/bin"
 
 if [ $1 = "windows" ]; then
