@@ -109,7 +109,8 @@ jobs:
         shell: bash
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          echo "$PWD" >> $GITHUB_PATH
+          ls /tmp
+          echo "/tmp" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -168,7 +169,8 @@ jobs:
       - name: Install buf
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          echo "$PWD" >> $GITHUB_PATH
+          ls /tmp
+          echo "/tmp" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -264,7 +266,8 @@ jobs:
       - name: Install buf
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          echo "$PWD" >> $GITHUB_PATH
+          ls /tmp
+          echo "/tmp" >> $GITHUB_PATH
            
       - name: Build prerelease
         run: make prerelease
