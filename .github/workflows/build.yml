@@ -169,16 +169,11 @@ jobs:
 
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-        
-      - name: See if it's placed properly
-        run: $HOME/.local/bin/buf --version
-
-      - name: See if buf is installed
-        run: buf --version
+      - run: ls -la
 
       - name: Build prerelease
         env: 
-          GOPATH: ${{ github.workspace }}
+          GOPATH: $HOME/go
         run: make prerelease
       
       - name: Build
