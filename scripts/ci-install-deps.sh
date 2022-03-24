@@ -18,6 +18,7 @@ elif [ $1 = "darwin" ]; then
   # In GHA, $HOME evaluates to /home/runner
   mv /tmp/buf/bin/buf "$HOME/.local/bin"
   chmod +x $HOME/.local/bin/buf
+  exit 0
 else
   DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
   wget --quiet "${DOWNLOAD}" -O - | tar -xz -C /tmp
