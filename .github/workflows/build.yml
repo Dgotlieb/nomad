@@ -108,9 +108,8 @@ jobs:
       - run: echo $HOME
 
       - name: Install dependencies
+        shell: bash
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}" "$HOME"
-
-      - run: ls -la $HOME/.local/bin
 
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
