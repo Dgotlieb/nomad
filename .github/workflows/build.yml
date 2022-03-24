@@ -167,7 +167,6 @@ jobs:
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
 
-      - name: Add local executables to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - run: echo $PWD
@@ -179,6 +178,8 @@ jobs:
         run: buf --version
 
       - name: Build prerelease
+        env: 
+          GOPATH: ${{ github.workspace }}
         run: make prerelease
       
       - name: Build
@@ -189,7 +190,7 @@ jobs:
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
           GO111MODULE: on
-          GOPATH: /home/runner/work/nomad/go
+          GOPATH: ${{ github.workspace }}
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
           mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
