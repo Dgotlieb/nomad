@@ -170,14 +170,13 @@ jobs:
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
 
-      - run: echo "${{ github.workspace }}/tmp/buf/bin" >> $GITHUB_PATH
-
-      - run: echo "what is HOME $HOME"
-
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - run: echo "what is HOME $HOME"
+      - run: ls -la $HOME/.local/bin
 
       - name: Test
-        run: ${{ github.workspace }}/tmp/buf/bin/buf --version
+        run: $HOME/.local/bin/buf --version
 
       - name: See if buf is installed
         run: buf --version
