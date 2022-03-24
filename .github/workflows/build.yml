@@ -105,7 +105,7 @@ jobs:
         run: |
           npm install -g yarn
 
-      - run: Add local executables to PATH
+      - name: Add local executables to PATH
         shell: bash
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
