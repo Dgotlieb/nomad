@@ -145,6 +145,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: go/src/github.com/hashicorp/nomad
       - name: Setup go
         uses: actions/setup-go@v2
         with:
@@ -170,6 +172,12 @@ jobs:
         shell: bash
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
         
+      - name: See if it's placed properly
+        run: $HOME/.local/bin/buf --version
+
+      - name: See if buf is installed
+        run: buf --version
+
       - name: Build prerelease
         run: make prerelease
       
@@ -181,7 +189,7 @@ jobs:
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
           GO111MODULE: on
-          GOPATH: $(go env GOPATH)/bin
+          GOPATH: /home/runner/work/nomad/go
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
           mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
@@ -269,12 +277,11 @@ jobs:
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: See if it's placed properly
-        run: $HOME/.local/bin/buf --version
+        run: "$HOME/.local/bin/buf" --version
 
       - name: See if buf is installed
         run: buf --version
         
-           
       - name: Build prerelease
         run: make prerelease
       
