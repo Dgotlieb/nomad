@@ -14,6 +14,7 @@ on:
 env:
   PKG_NAME: "nomad"
   GO_TAGS: "ui codegen_generated release"
+  GOPATH: $(go env GOPATH)/bin
 
 jobs:
   get-go-version:
@@ -91,9 +92,6 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
- 
-      - name: What is gopath
-        run: echo $GOPATH
 
       - name: Build dependencies
         run: make deps
@@ -108,13 +106,12 @@ jobs:
         run: |
           npm install -g yarn
 
+      - name: Install dependencies
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
+
       - name: Add local executables to PATH
         shell: bash
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      # Install latest version of buf & other dependencies
-      - name: Install dependencies
-        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
 
       - name: Build prerelease
         run: make prerelease
@@ -152,10 +149,7 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
-     
-      - name: What is gopath
-        run: echo $GOPATH
-        
+
       - name: Build dependencies
         run: make deps
       
@@ -169,12 +163,12 @@ jobs:
         run: |
           npm install -g yarn
           
-      - name: Add local executables to PATH
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-
-      # Install latest version of buf & other dependencies
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
+
+      - name: Add local executables to PATH
+        shell: bash
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
         
       - name: Build prerelease
         run: make prerelease
@@ -267,12 +261,18 @@ jobs:
         run: |
           npm install -g yarn
 
+      - name: Install dependencies
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
+
       - name: Add local executables to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # Install latest version of buf
-      - name: Install buf
-        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
+      - name: See if it's placed properly
+        run: $HOME/.local/bin/buf --version
+
+      - name: See if buf is installed
+        run: buf --version
+        
            
       - name: Build prerelease
         run: make prerelease
