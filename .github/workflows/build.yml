@@ -145,8 +145,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: go/src/github.com/hashicorp/nomad
+
       - name: Setup go
         uses: actions/setup-go@v2
         with:
@@ -169,8 +168,9 @@ jobs:
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
 
       - name: Add local executables to PATH
-        shell: bash
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - run: ls -la
         
       - name: See if it's placed properly
         run: $HOME/.local/bin/buf --version
