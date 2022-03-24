@@ -173,6 +173,8 @@ jobs:
 
       - name: Build prerelease
         run: make prerelease
+
+      - run: make generate-structs
       
       - name: Build
         env:
@@ -181,7 +183,7 @@ jobs:
           GO_TAGS: ${{ env.GO_TAGS }}
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
-          GO111MODULE: off
+          # GO111MODULE: off
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
           mv pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip ${{ env.PKG_NAME }}_${{ needs.get-product-version.outputs.product-version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip
