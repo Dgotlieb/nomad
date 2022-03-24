@@ -170,7 +170,7 @@ jobs:
       - name: Add local executables to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - run: ls -la
+      - run: echo $PWD
         
       - name: See if it's placed properly
         run: $HOME/.local/bin/buf --version
