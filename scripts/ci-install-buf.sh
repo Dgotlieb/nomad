@@ -7,6 +7,7 @@ VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
 echo "where am i: $PWD"
+echo "github workspace: $GITHUB_WORKSPACE"
 
 # Install buf based on goos
 if [ $1 = "windows" ]; then
