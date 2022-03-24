@@ -92,6 +92,9 @@ jobs:
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
  
+      - name: What is gopath
+        run: echo $GOPATH
+
       - name: Build dependencies
         run: make deps
       
@@ -150,6 +153,9 @@ jobs:
         with:
           go-version: ${{ needs.get-go-version.outputs.go-version }}
      
+      - name: What is gopath
+        run: echo $GOPATH
+        
       - name: Build dependencies
         run: make deps
       
@@ -245,7 +251,8 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - run: echo "gopath- $GOPATH"
+      - name: What is gopath
+        run: echo $GOPATH
 
       - name: Build dependencies
         run: make deps
