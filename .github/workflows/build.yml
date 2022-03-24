@@ -109,15 +109,12 @@ jobs:
         shell: bash
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # Install latest version of buf
-      - name: Install buf
-        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
-
+      # Install latest version of buf & other dependencies
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
 
       - name: Build prerelease
-        run:  make prerelease
+        run: make prerelease
       
       - name: Build
         env:
@@ -169,10 +166,7 @@ jobs:
       - name: Add local executables to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # Install latest version of buf
-      - name: Install buf
-        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
-
+      # Install latest version of buf & other dependencies
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
         
