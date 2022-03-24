@@ -145,6 +145,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: go/src/github.com/hashicorp/nomad
 
       - name: Setup go
         uses: actions/setup-go@v2
@@ -174,7 +176,10 @@ jobs:
       - name: Build prerelease
         run: make prerelease
 
-      - run: make generate-structs
+      - name: Make generate-structs
+        env: 
+          GOPATH: go
+        run: make generate-structs
       
       - name: Build
         env:
@@ -183,6 +188,7 @@ jobs:
           GO_TAGS: ${{ env.GO_TAGS }}
           GO_LDFLAGS: ${{ needs.generate-ld-flags.outputs.ldflags }}
           CGO_ENABLED: 1
+          GOPATH: go
           # GO111MODULE: off
         run: |
           make pkg/${{ matrix.goos }}_${{ matrix.goarch }}.zip
