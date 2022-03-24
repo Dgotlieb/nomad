@@ -109,7 +109,7 @@ jobs:
         shell: bash
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          ls /tmp
+          ls -la
           echo "/tmp" >> $GITHUB_PATH
 
       - name: Install dependencies
@@ -169,7 +169,7 @@ jobs:
       - name: Install buf
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          ls /tmp
+          ls -la
           echo "/tmp" >> $GITHUB_PATH
 
       - name: Install dependencies
@@ -266,7 +266,7 @@ jobs:
       - name: Install buf
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          ls /tmp
+          ls -la
           echo "/tmp" >> $GITHUB_PATH
            
       - name: Build prerelease
