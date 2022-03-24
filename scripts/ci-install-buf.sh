@@ -9,13 +9,13 @@ DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 # Install buf based on goos
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
-  curl -sSL --fail "${DOWNLOAD}" -o /tmp/buf.exe
+  curl -sSL --fail "${DOWNLOAD}" -o "${PWD}/buf.exe"
 elif [ $1 = "darwin" ]; then
   DOWNLOAD="${DOWNLOAD}-Darwin-x86_64.tar.gz"
-  wget -c "${DOWNLOAD}" -O - | tar -xz -C /tmp
+  wget -qc "${DOWNLOAD}" -O - | tar -xz -C "${PWD}"
 else
-    DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
-    wget -c "${DOWNLOAD}" -O - | tar -xz -C /tmp
+  DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
+  wget -qc "${DOWNLOAD}" -O - | tar -xz -C "${PWD}"
 fi
 
 # Simple smoke test to ensure buf is installed
