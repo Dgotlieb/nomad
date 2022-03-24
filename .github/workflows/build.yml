@@ -172,7 +172,10 @@ jobs:
           echo "${{ github.workspace }}/tmp/buf/bin/buf" >> "$GITHUB_PATH"
 
       - name: List GITHUB_WORKSPACE/tmp
-        run: echo "${{ github.workspace }}/tmp"
+        run: echo "${{ github.workspace }}/tmp/buf/bin"
+
+      - name: Test
+        run: ${{ github.workspace }}/tmp/buf/bin/buf --version
 
       - name: See if buf is installed
         run: buf --version
