@@ -105,13 +105,13 @@ jobs:
         run: |
           npm install -g yarn
 
-      - run: echo $HOME
-
       - name: Install dependencies
         shell: bash
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}" "$HOME"
 
-      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Add buf binary to PATH
+        shell: bash
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - run: buf --version
 
