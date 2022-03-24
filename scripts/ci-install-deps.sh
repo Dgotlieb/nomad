@@ -17,7 +17,6 @@ mkdir -p  "$DIR/.local/bin"
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
   wget "${DOWNLOAD}" -O "$DIR/.local/bin/buf.exe"
-  chmod +x "$DIR/.local/bin/buf.exe"
 elif [ $1 = "darwin" ]; then
   DOWNLOAD="${DOWNLOAD}-Darwin-x86_64.tar.gz"
   wget "${DOWNLOAD}" -O - | tar -xz -C /tmp
