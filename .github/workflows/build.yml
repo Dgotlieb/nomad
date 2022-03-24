@@ -276,12 +276,6 @@ jobs:
       - name: Add local executables to PATH
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: See if it's placed properly
-        run: "$HOME/.local/bin/buf" --version
-
-      - name: See if buf is installed
-        run: buf --version
-        
       - name: Build prerelease
         run: make prerelease
       
