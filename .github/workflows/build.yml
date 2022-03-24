@@ -169,10 +169,12 @@ jobs:
       - name: Install buf
         run: |
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          echo "${{ github.workspace }}/tmp/buf/bin/buf" >> "$GITHUB_PATH"
 
-      - name: List GITHUB_WORKSPACE/tmp
-        run: echo "${{ github.workspace }}/tmp/buf/bin"
+      - run: echo "${{ github.workspace }}/tmp/buf/bin" >> $GITHUB_PATH
+
+      - run: echo "what is HOME $HOME"
+
+      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Test
         run: ${{ github.workspace }}/tmp/buf/bin/buf --version

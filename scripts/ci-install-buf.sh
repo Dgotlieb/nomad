@@ -9,6 +9,8 @@ DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 # In GHA, this evaluates to /home/runner/work/nomad/nomad/tmp
 mkdir -p $PWD/tmp
 
+echo "what is home: $HOME"
+
 # Install buf based on goos
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
