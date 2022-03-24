@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo "Installing dependencies for goos:$1 goarch:$2"
 
 #### Install buf CLI ####
@@ -9,7 +11,6 @@ DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
 # $HOME evaluates to /home/runner in GHA
 DIR="/home/runner"
-mkdir -p $DIR/.local/bin
 
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
