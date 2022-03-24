@@ -171,6 +171,8 @@ jobs:
           sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
           ls /tmp
           echo "/tmp" >> $GITHUB_PATH
+          echo "github path: $GITHUB_PATH"
+          echo "path: $PATH"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
