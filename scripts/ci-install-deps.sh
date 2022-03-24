@@ -7,19 +7,17 @@ echo "Installing dependencies for goos:$1 goarch:$2"
 VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
-# $HOME is set to home/runner in GHA
-DIR="home/runner"
+# $HOME evaluates to /home/runner in GHA
+DIR="/home/runner"
 mkdir -p $DIR/.local/bin
 
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
-  # In GHA, $HOME evaluates to /home/runner
   wget --quiet "${DOWNLOAD}" -O "$DIR/.local/bin/buf.exe"
   chmod +x "$DIR/.local/bin/buf.exe"
 elif [ $1 = "darwin" ]; then
   DOWNLOAD="${DOWNLOAD}-Darwin-x86_64.tar.gz"
   wget --quiet "${DOWNLOAD}" -O - | tar -xz -C /tmp
-  # In GHA, $HOME evaluates to /home/runner
   mv /tmp/buf/bin/buf "$DIR/.local/bin"
   chmod +x "$DIR/.local/bin/buf"
   # Exit script with success code; nothing more to do for darwin builds
@@ -27,7 +25,6 @@ elif [ $1 = "darwin" ]; then
 else
   DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
   wget --quiet "${DOWNLOAD}" -O - | tar -xz -C /tmp
-  # In GHA, $HOME evaluates to /home/runner
   mv /tmp/buf/bin/buf "$DIR/.local/bin"
   chmod +x "$DIR/.local/bin/buf"
 fi
