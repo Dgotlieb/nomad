@@ -105,12 +105,13 @@ jobs:
         run: |
           npm install -g yarn
 
-      - name: Install buf
+      - run: Add local executables to PATH
         shell: bash
-        run: |
-          sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          ls /tmp
-          echo "/tmp" >> $GITHUB_PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      # Install latest version of buf
+      - name: Install buf
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -164,22 +165,13 @@ jobs:
       - name: Install Yarn
         run: |
           npm install -g yarn
+          
+      - name: Add local executables to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       # Install latest version of buf
       - name: Install buf
-        run: |
-          sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-
-      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - run: echo "what is HOME $HOME"
-      - run: ls -la $HOME/.local/bin
-
-      - name: Test
-        run: $HOME/.local/bin/buf --version
-
-      - name: See if buf is installed
-        run: buf --version
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
 
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
@@ -259,6 +251,8 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
+      - run: echo "gopath- $GOPATH"
+
       - name: Build dependencies
         run: make deps
       
@@ -272,11 +266,12 @@ jobs:
         run: |
           npm install -g yarn
 
+      - name: Add local executables to PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      # Install latest version of buf
       - name: Install buf
-        run: |
-          sudo sh scripts/ci-install-buf.sh "${{ matrix.goos }}"
-          ls /tmp
-          echo "/tmp" >> $GITHUB_PATH
+        run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}"
            
       - name: Build prerelease
         run: make prerelease

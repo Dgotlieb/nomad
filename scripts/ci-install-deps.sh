@@ -2,6 +2,35 @@
 
 echo "Installing dependencies for goos:$1 goarch:$2"
 
+#### Install buf CLI ####
+
+VERSION=1.1.1
+DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
+
+if [ $1 = "windows" ]; then
+  DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
+  # In GHA, $HOME evaluates to /home/runner
+  wget --quiet "${DOWNLOAD}" -O "$HOME/.local/bin/buf.exe"
+  chmod +x $HOME/.local/bin/buf.exe
+elif [ $1 = "darwin" ]; then
+  DOWNLOAD="${DOWNLOAD}-Darwin-x86_64.tar.gz"
+  wget --quiet "${DOWNLOAD}" -O - | tar -xz -C /tmp
+  # In GHA, $HOME evaluates to /home/runner
+  mv /tmp/buf/bin/buf "$HOME/.local/bin"
+  chmod +x $HOME/.local/bin/buf
+else
+  DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
+  wget --quiet "${DOWNLOAD}" -O - | tar -xz -C /tmp
+  # In GHA, $HOME evaluates to /home/runner
+  mv /tmp/buf/bin/buf "$HOME/.local/bin"
+  chmod +x $HOME/.local/bin/buf
+fi
+
+# Simple smoke test to ensure buf's installed
+buf --version
+
+#### Install required libraries ####
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Update and ensure we have apt-add-repository
