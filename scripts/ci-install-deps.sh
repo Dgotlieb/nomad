@@ -7,7 +7,7 @@ echo "Installing dependencies for goos:$1 goarch:$2"
 VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
-echo "HOME- $HOME"
+HOME=/home/runner
 
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
@@ -20,7 +20,7 @@ elif [ $1 = "darwin" ]; then
   # In GHA, $HOME evaluates to /home/runner
   mv /tmp/buf/bin/buf "$HOME/.local/bin"
   chmod +x "$HOME/.local/bin/buf"
-  # Exit script; nothing more to do for darwin builds
+  # Exit script with success code; nothing more to do for darwin builds
   exit 0
 else
   DOWNLOAD="${DOWNLOAD}-Linux-x86_64.tar.gz"
