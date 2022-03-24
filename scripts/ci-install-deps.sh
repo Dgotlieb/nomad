@@ -7,7 +7,9 @@ echo "Installing dependencies for goos:$1 goarch:$2"
 VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
 
-HOME=/home/runner
+mkdir -p $HOME/.local/bin
+echo "PWD: $PWD"
+echo "HOME: $HOME"
 
 if [ $1 = "windows" ]; then
   DOWNLOAD="${DOWNLOAD}-Windows-x86_64.exe"
