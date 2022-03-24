@@ -105,10 +105,16 @@ jobs:
         run: |
           npm install -g yarn
 
+      - run: echo $HOME
+
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}" "$HOME"
 
+      - run: ls -la $HOME/.local/bin
+
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - run: buf --version
 
       - name: Build prerelease
         run: make prerelease
@@ -164,6 +170,8 @@ jobs:
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}" "$HOME"
 
       - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - run: buf --version
 
       - name: Build prerelease
         run: make prerelease

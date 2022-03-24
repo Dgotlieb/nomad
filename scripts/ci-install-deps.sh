@@ -9,9 +9,9 @@ echo "Installing dependencies for goos:$1 goarch:$2 in dir:$3"
 
 VERSION=1.1.1
 DOWNLOAD=https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf
-
-# $HOME evaluates to /home/runner in GHA
 DIR="$3"
+
+# Create a dir to store the buf binary
 mkdir -p  "$DIR/.local/bin"
 
 if [ $1 = "windows" ]; then
