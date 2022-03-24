@@ -167,7 +167,7 @@ jobs:
       - name: Install dependencies
         run: sudo sh scripts/ci-install-deps.sh "${{ matrix.goos }}" "${{ matrix.goarch }}"
 
-        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - run: echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - run: echo $PWD
         
