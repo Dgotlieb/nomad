@@ -15,10 +15,6 @@ environment variables.
 
 @include 'envvars.mdx'
 
-~> Port labels and task names will have any non-alphanumeric or underscore
-characters in their names replaced by underscores `_` when they're used in
-environment variable names such as `NOMAD_ADDR_<task>_<label>`.
-
 ## Task Identifiers
 
 Nomad will pass both the allocation ID and name, the deployment ID that created
@@ -55,7 +51,7 @@ cluster gets more or less busy.
 ### Networking
 
 Nomad assigns IPs and ports to your jobs and exposes them via environment
-variables. See the [Networking](/docs/job-specification/network) page for more
+variables. See the [Networking](/nomad/docs/job-specification/network) page for more
 details.
 
 ### Task Directories
@@ -112,7 +108,7 @@ using the `exec`, `raw_exec`, and `java` task drivers. The variables that are
 passed to the tasks can be controlled using the client configuration
 [`env.denylist`][].
 
-[jobspec]: /docs/job-specification 'Nomad Job Specification'
-[vault]: /docs/integrations/vault-integration 'Nomad Vault Integration'
-[filesystem internals]: /docs/concepts/filesystem
-[`env.denylist`]: /docs/configuration/client#env-denylist
+[jobspec]: /nomad/docs/job-specification 'Nomad Job Specification'
+[vault]: /nomad/docs/integrations/vault-integration 'Nomad Vault Integration'
+[filesystem internals]: /nomad/docs/concepts/filesystem
+[`env.denylist`]: /nomad/docs/configuration/client#env-denylist

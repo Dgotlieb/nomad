@@ -82,6 +82,10 @@
         "path": "concepts"
       },
       {
+        "title": "ACL",
+        "path": "concepts/acl"
+      },
+      {
         "title": "Architecture",
         "path": "concepts/architecture"
       },
@@ -107,6 +111,10 @@
           {
             "title": "Storage",
             "path": "concepts/plugins/csi"
+          },
+          {
+            "title": "Networking",
+            "path": "concepts/plugins/cni"
           }
         ]
       },
@@ -574,6 +582,10 @@
         ]
       },
       {
+        "title": "login",
+        "path": "commands/login"
+      },
+      {
         "title": "monitor",
         "path": "commands/monitor"
       },
@@ -656,6 +668,10 @@
             ]
           },
           {
+            "title": "client-state",
+            "path": "commands/operator/client-state"
+          },
+          {
             "title": "debug",
             "path": "commands/operator/debug"
           },
@@ -683,14 +699,6 @@
                 "path": "commands/operator/gossip/keyring-use"
               }
             ]
-          },
-          {
-            "title": "keygen",
-            "path": "commands/operator/keygen"
-          },
-          {
-            "title": "keyring",
-            "path": "commands/operator/keyring"
           },
           {
             "title": "metrics",
@@ -1554,6 +1562,10 @@
         "path": "job-specification/group"
       },
       {
+        "title": "identity",
+        "path": "job-specification/identity"
+      },
+      {
         "title": "job",
         "path": "job-specification/job"
       },
@@ -1842,6 +1854,27 @@
       {
         "title": "Variable Interpolation",
         "path": "runtime/interpolation"
+      }
+    ]
+  },
+  {
+    "title": "Networking",
+    "routes": [
+      {
+        "title": "Overview",
+        "path": "networking"
+      },
+      {
+        "title": "Service Discovery",
+        "path": "networking/service-discovery"
+      },
+      {
+        "title": "Service Mesh",
+        "path": "networking/service-mesh"
+      },
+      {
+        "title": "CNI",
+        "path": "networking/cni"
       }
     ]
   },
