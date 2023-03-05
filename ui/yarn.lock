@@ -2560,15 +2560,7 @@
     ember-cli-version-checker "^5.1.2"
     semver "^7.3.5"
 
-"@embroider/addon-shim@^1.0.0", "@embroider/addon-shim@^1.2.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-1.5.0.tgz#639b8b394336a5ae26dd3e24ffc3d34d864ac5ce"
-  integrity sha512-5zgwA/wTYjgn2Oo6hKRQhF/5Gnwb+hGhj/WXhZQa5yA7fRRdBV1tVMS7b7SLawZcmOhuWkyPwFdgsYtGBvDB0w==
-  dependencies:
-    "@embroider/shared-internals" "^1.5.0"
-    semver "^7.3.5"
-
-"@embroider/addon-shim@^1.5.0", "@embroider/addon-shim@^1.8.4":
+"@embroider/addon-shim@^1.0.0", "@embroider/addon-shim@^1.2.0", "@embroider/addon-shim@^1.5.0", "@embroider/addon-shim@^1.8.4":
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/@embroider/addon-shim/-/addon-shim-1.8.4.tgz#0e7f32c5506bf0f3eb0840506e31c36c7053763c"
   integrity sha512-sFhfWC0vI18KxVenmswQ/ShIvBg4juL8ubI+Q3NTSdkCTeaPQ/DIOUF6oR5DCQ8eO/TkIaw+kdG3FkTY6yNJqA==
@@ -2748,7 +2740,7 @@
     semver "^7.3.5"
     typescript-memoize "^1.0.1"
 
-"@embroider/shared-internals@1.5.0", "@embroider/shared-internals@^1.5.0":
+"@embroider/shared-internals@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@embroider/shared-internals/-/shared-internals-1.5.0.tgz#d3883f13571be36fcdbc59c65c785db7b6d8186e"
   integrity sha512-kdR7Fh2YdzsNofJO+DJxLfrlMbW4/NNf78aMXgE21z/tg9GO5W2mKlI1DzsO2JlO5yfZdiYfqb9C9vSLJEx14A==
@@ -10044,14 +10036,13 @@ ember-cli@~3.28.5:
     workerpool "^6.1.4"
     yam "^1.0.0"
 
-ember-click-outside@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-3.0.0.tgz#a7271345c5960b5dfe1e45a7f7245d1cf8f383dc"
-  integrity sha512-X2hLE9Set/tQ9KAEUxfGzCTUgJu/g2sKG+t2ghk/EDz8zF+Y/DPtlxeyZTR6NEPsUbzu3Pqe9gWJUxwaiXC0wg==
+ember-click-outside@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ember-click-outside/-/ember-click-outside-6.0.1.tgz#77f65f4b64472e494bf24318693764fad9767332"
+  integrity sha512-1aI0vaggymp8JR2gARy7kgDnJ0Bk+ZDcjOzT+Cgtr2cRCBYFuJeU0OMKJW8c7pRm2LwIDZgzdTRK+AaKQbt9mw==
   dependencies:
-    ember-cli-babel "^7.26.6"
-    ember-cli-htmlbars "^5.7.1"
-    ember-modifier "^2.1.0 || ^3.0.0"
+    "@embroider/addon-shim" "^1.0.0"
+    ember-modifier "^3.2.7 || ^4.0.0"
 
 ember-compatibility-helpers@^1.1.1, ember-compatibility-helpers@^1.1.2, ember-compatibility-helpers@^1.2.5:
   version "1.2.6"
@@ -10343,7 +10334,7 @@ ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-version-checker "^2.1.2"
     ember-compatibility-helpers "^1.2.0"
 
-ember-modifier@3.2.7, "ember-modifier@^2.1.0 || ^3.0.0", ember-modifier@^3.0.0, ember-modifier@^3.2.7:
+ember-modifier@3.2.7, ember-modifier@^3.0.0, ember-modifier@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-3.2.7.tgz#f2d35b7c867cbfc549e1acd8d8903c5ecd02ea4b"
   integrity sha512-ezcPQhH8jUfcJQbbHji4/ZG/h0yyj1jRDknfYue/ypQS8fM8LrGcCMo0rjDZLzL1Vd11InjNs3BD7BdxFlzGoA==
@@ -10354,10 +10345,10 @@ ember-modifier@3.2.7, "ember-modifier@^2.1.0 || ^3.0.0", ember-modifier@^3.0.0, 
     ember-cli-typescript "^5.0.0"
     ember-compatibility-helpers "^1.2.5"
 
-"ember-modifier@^2.1.2 || ^3.1.0 || ^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-4.0.0.tgz#0bb3fae11435fcbe0d3dfa852ce224d81d75ddb2"
-  integrity sha512-OdconmrqKP2haK4kBwNmtnA2NiC2MFmIJC3LgJ1WhwZ49GaktM+bRIuFxF/S5W0oaegzKs1qH2ZDlqMeO2L3nw==
+"ember-modifier@^2.1.2 || ^3.1.0 || ^4.0.0", "ember-modifier@^3.2.7 || ^4.0.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/ember-modifier/-/ember-modifier-4.1.0.tgz#cb91efbf8ca4ff4a1a859767afa42dddba5a2bbd"
+  integrity sha512-YFCNpEYj6jdyy3EjslRb2ehNiDvaOrXTilR9+ngq+iUqSHYto2zKV0rleiA1XJQ27ELM1q8RihT29U6Lq5EyqQ==
   dependencies:
     "@embroider/addon-shim" "^1.8.4"
     ember-cli-normalize-entity-name "^1.0.0"
